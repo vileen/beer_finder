@@ -1,2 +1,4 @@
-# Boilerplate
-React App
+# Beer finder
+
+npm install
+npm start
