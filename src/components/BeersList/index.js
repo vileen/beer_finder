@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import InfiniteLoader from 'react-infinite-loader'
+import InfiniteScroll from 'react-infinite-scroller'
 
 import { fetchBeers, beersSearch } from '../../actions';
 import Image from './ImageWithLoader';
@@ -12,22 +12,18 @@ class BeersList extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            page: 1
-        };
+        this.state = { isRestart: false };
 
+        this.hasMore = true;
         this.handleVisit = this.handleVisit.bind(this);
-    }
-
-    componentDidMount() {
-        this.props.fetchBeers();
     }
 
     renderList() {
         return _.map(this.props.beers, (beerData) => {
             if(beerData) {
+                this.hasMore = true;
                 return (
-                    <li key={beerData.id} className="list-group-item list-group-item-action">
+                    <div key={beerData.id} className="list-group-item list-group-item-action">
                         <Link to={`/beers/${beerData.id}`}>
                             <Image url={beerData.image_url}/>
                             <div className="beer-info">
@@ -36,32 +32,32 @@ class BeersList extends Component {
                                 <p>{beerData.tagline}</p>
                             </div>
                         </Link>
-                    </li>
+                    </div>
                 )
             } else {
                 // getting rid of loader element so that scroll cant go further and trigger next search
-                document.getElementsByClassName('loader')[0].style.display = 'none';
+                this.hasMore = false;
             }
         });
     }
 
-    handleVisit() {
+    handleVisit(page) {
+        if(this.state.isRestart) {
+            this.setState({ isRestart: false });
+        }
         if (!this.searchActive) {
-            this.setState({
-                page: this.state.page + 1
-            });
-            this.props.fetchBeers(this.state.page);
+            this.props.fetchBeers(page);
         }
     }
 
     onSearchTermChange(term) {
         if(term) {
+            document.getElementsByClassName('loader')[0].style.display = 'none';
             this.props.beersSearch(term);
         } else {
-            this.setState({
-                page: 1
-            });
-            this.props.fetchBeers(this.state.page);
+            document.getElementsByClassName('loader')[0].style.display = 'block';
+            this.hasMore = true;
+            this.setState({ isRestart: true });
         }
     }
 
@@ -75,10 +71,15 @@ class BeersList extends Component {
         return (
             <div className="beer-list">
                 <SearchBar onSearchTermChange={beerSearch} searchActive={this.setSearchActive.bind(this)}/>
-                <ul className="list-group">
+                <InfiniteScroll
+                    className="list-group"
+                    pageStart={0}
+                    loadMore={this.handleVisit}
+                    hasMore={this.hasMore}
+                    isRestart={this.state.isRestart}
+                    loader={<div className="loader" />}>
                     {this.renderList()}
-                </ul>
-                <InfiniteLoader onVisited={ () => this.handleVisit() } />
+                </InfiniteScroll>
             </div>
         );
     }

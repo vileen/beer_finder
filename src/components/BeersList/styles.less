@@ -1,4 +1,4 @@
-ul.list-group {
+div.list-group { // moar specific than bootstrap!
   justify-content: space-between;
   margin-top: 8px;
   flex-wrap: wrap;
@@ -59,7 +59,34 @@ ul.list-group {
   }
 }
 
+@media (max-width: 900px) {
+  div.list-group {
+    display: block;
 
+    .list-group-item {
+      width: 100%;
+      height: 180px;
+
+      a {
+        flex-direction: row;
+
+        .img-container {
+          flex: 1;
+
+          .img {
+            height: 150px;
+          }
+        }
+
+        .beer-info {
+          flex: 5;
+          margin: auto;
+          white-space: initial;
+        }
+      }
+    }
+  }
+}
 
 
 
