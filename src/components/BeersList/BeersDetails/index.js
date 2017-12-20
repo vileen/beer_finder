@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Loader from './loader';
-import { fetchBeer } from '../actions';
-import Image from './image_with_loader';
+import Loader from '../Loader';
+import { fetchBeer } from '../../../actions';
+import Image from '../ImageWithLoader';
 
 class BeerShow extends Component {
     componentDidMount() {

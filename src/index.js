@@ -9,8 +9,8 @@ import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
-import BeersList from './components/beers_list';
-import BeerDetails from './components/beers_details';
+import BeersList from './components/BeersList';
+import BeerDetails from './components/BeersList/BeersDetails';
 
 export const store = createStoreWithMiddleware(reducers);
 
@@ -19,7 +19,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div className="main-div">
                 <Switch>
-                    <Route path="/beers/:id" component={ BeerDetails } modal={true} />
+                    <Route path="/beers/:id" component={ BeerDetails } />
                     <Route path="/" component={ BeersList } />
                 </Switch>
             </div>

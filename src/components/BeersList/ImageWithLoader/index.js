@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Loader from './loader';
+import Loader from '../Loader';
 
 export default class ImageWithLoader extends Component {
     constructor(props) {
