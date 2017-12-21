@@ -3,27 +3,17 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import promise from 'redux-promise';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-import reducers from './reducers';
-
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 import BeersList from './components/BeersList';
-import BeerDetails from './components/BeersList/BeersDetails';
+import reducers from './reducers';
 
+
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 export const store = createStoreWithMiddleware(reducers);
 
 ReactDOM.render(
     <Provider store={ store }>
-        <BrowserRouter>
-            <div className="main-div">
-                <Switch>
-                    <Route path="/beers/:id" component={ BeerDetails } />
-                    <Route path="/" component={ BeersList } />
-                </Switch>
-            </div>
-        </BrowserRouter>
+        <BeersList />
     </Provider>
     , document.querySelector('.container')
 );

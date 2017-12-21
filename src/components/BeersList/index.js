@@ -1,18 +1,23 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller'
 
 import { fetchBeers, beersSearch } from '../../actions';
 import Image from './ImageWithLoader';
 import SearchBar from './SearchBar';
+import SimpleDialog from './SimpleDialog';
+import BeerDetails from './BeersDetails';
 
 class BeersList extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { isRestart: false };
+        this.state = { 
+            isRestart: false, 
+            dialogOpen: false, 
+            detailsData: {} 
+        };
 
         this.hasMore = true;
         this.handleVisit = this.handleVisit.bind(this);
@@ -24,22 +29,39 @@ class BeersList extends Component {
                 this.hasMore = true;
                 return (
                     <div key={beerData.id} className="list-group-item list-group-item-action">
-                        <Link to={`/beers/${beerData.id}`}>
+                        <a
+                            href="#"
+                            onClick={this.handleDialogOpen.bind(this, beerData)}
+                        >
                             <Image url={beerData.image_url}/>
                             <div className="beer-info">
                                 <h4>{beerData.name}</h4>
                                 <hr />
                                 <p>{beerData.tagline}</p>
                             </div>
-                        </Link>
+                        </a>
                     </div>
                 )
             } else {
-                // getting rid of loader element so that scroll cant go further and trigger next search
                 this.hasMore = false;
             }
         });
     }
+
+    handleDialogOpen = (beerData, event) => {
+        event.preventDefault();
+
+        this.setState({
+            dialogOpen: true,
+            detailsData: beerData
+        });
+    };
+
+    handleDialogClose = () => {
+        this.setState({
+            dialogOpen: false
+        });
+    };
 
     handleVisit(page) {
         if(this.state.isRestart) {
@@ -80,6 +102,12 @@ class BeersList extends Component {
                     loader={<div className="loader" />}>
                     {this.renderList()}
                 </InfiniteScroll>
+                <SimpleDialog
+                    open={this.state.dialogOpen}
+                    onClose={this.handleDialogClose}
+                >
+                    <BeerDetails beer={this.state.detailsData} />
+                </SimpleDialog>
             </div>
         );
     }

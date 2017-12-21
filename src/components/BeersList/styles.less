@@ -56,10 +56,14 @@ div.list-group { // moar specific than bootstrap!
     a:hover {
       text-decoration: none;
     }
+
+    a:focus {
+      outline: none;
+    }
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   div.list-group {
     display: block;
 
@@ -87,118 +91,3 @@ div.list-group { // moar specific than bootstrap!
     }
   }
 }
-
-
-
-
-
-//.beer-list {
-//  .img-container {
-//    .loader-container {
-//      position: absolute;
-//      left: 50%;
-//      margin-top: 10px;
-//
-//      .loader {
-//        position: relative;
-//        left: -50%;
-//      }
-//    }
-//  }
-//  .form-control {
-//    margin-top: 24px
-//  }
-//
-//  .img {
-//    height: 200px;
-//    margin: 0 auto;
-//  }
-//
-//  .list-group-item {
-//    display: inline;
-//    border-top-left-radius: .25rem;
-//    border-top-right-radius: .25rem;
-//    margin-top: 16px;
-//    float: left;
-//    height: 333px;
-//  }
-//
-//  .list-group-item-action {
-//    width: 24%!important;
-//  }
-//
-//  .beer-info, .img-container {
-//    text-align: center;
-//  }
-//
-//  .beer-info {
-//    padding-top: 8px;
-//  }
-//
-//  .form-control {
-//    border-bottom-left-radius: 0!important;
-//    border-bottom-right-radius: 0!important;
-//  }
-//
-//  .list-group {
-//    display: inline-block!important;
-//    flex-direction: unset!important;
-//    width: 100%;
-//  }
-//
-//  h4, p {
-//    overflow: hidden;
-//    text-overflow: ellipsis;
-//    word-wrap: break-word;
-//    display: block;
-//    line-height: 1em; /* a */
-//  }
-//
-//  h4 {
-//    max-height: 1.1em;
-//  }
-//
-//  p {
-//    max-height: 2em;
-//  }
-//
-//  li:nth-child(4n+1), li:nth-child(4n+2), li:nth-child(4n+3) {
-//    margin-right: 1.33%;
-//  }
-//
-//  a, input, ::-webkit-input-placeholder {
-//    color: #83AF9B!important;
-//  }
-//
-//  a:hover {
-//    text-decoration: none!important;
-//  }
-//
-//  @media screen and (max-width: 768px) {
-//    .list-group-item-action {
-//      width: 100% !important;
-//      margin-right: 0 !important;
-//      height: 150px!important;
-//      margin-top: 8px;
-//    }
-//
-//    .img-container {
-//      width: 25%;
-//      text-align: center;
-//
-//      .img {
-//        height: 120px;
-//      }
-//    }
-//
-//    .beer-info {
-//      margin: auto;
-//      width: 75%;
-//    }
-//
-//    a {
-//      width: 100%;
-//      display: flex;
-//    }
-//  }
-//}

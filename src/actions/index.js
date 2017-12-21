@@ -3,7 +3,6 @@ import axios from 'axios';
 const ROOT_URL = 'https://api.punkapi.com/v2/beers';
 
 export const FETCH_BEERS = 'fetch_beers';
-export const FETCH_BEER = 'fetch_beer';
 export const SEARCH_BEERS = 'search_beers';
 
 export function fetchBeers(page) {
@@ -20,15 +19,6 @@ export function beersSearch(term) {
 
     return {
         type: SEARCH_BEERS,
-        payload: request
-    }
-}
-
-export function fetchBeer(id) {
-    const request = axios.get(`${ROOT_URL}/${id}`);
-
-    return {
-        type: FETCH_BEER,
         payload: request
     }
 }
