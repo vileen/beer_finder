@@ -3,11 +3,17 @@ desc
 
 ## Screenshots
 
-![full screen dialog](./images/full-screen-dialog.png)
+- List
 ![full screen list](./images/full-screen-list.png)
-![mobile dialog](./images/mobile-dialog.png)
+
+- Details
+![full screen dialog](./images/full-screen-dialog.png)
+
+- Mobile list
 ![mobile list](./images/mobile-list.png)
 
+- Mobile details
+![mobile dialog](./images/mobile-dialog.png)
 
 ## Usage
 
