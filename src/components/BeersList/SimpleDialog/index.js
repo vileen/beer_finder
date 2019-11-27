@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dialog, { DialogTitle, DialogActions, DialogContent, withMobileDialog } from 'material-ui/Dialog';
-import Button from 'material-ui/Button';
+import { Dialog, Button, DialogTitle, DialogActions, DialogContent, withMobileDialog } from '@material-ui/core';
 
 class SimpleDialog extends Component {
 
